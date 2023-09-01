@@ -1,0 +1,524 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-941R5R0YNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-941R5R0YNM');
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no"/>
+<meta name="description" content="あなたのアクセスしているIPアドレス情報などをENVとJavaScriptで取得し表示します。あなたのIPアドレスからポート疎通・ping疎通・DNS索引・WHOIS情報も取得できます。">
+<meta name="keywords" content="IPアドレス,ENV,ポート,確認,無料,調べ方,グローバルIPアドレス,IP,検索">
+<meta name="robots" content="all">
+<meta http-equiv="Content-Language" content="ja">
+<title>アクセス情報【使用中のIPアドレス確認】</title>
+<link href="../css/tm01_v3.css" rel="stylesheet" type="text/css" id="tm01css" title="tm01css">
+<link href="../css/com_v1.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../js/tm01_v3.js"></script>
+<script type="text/javascript" src="../js/supportCom_v2.js"></script>
+<style type="text/css">
+<!--
+.tmTable.getinfo th{
+text-align: left;
+font-weight: normal;
+white-space: nowrap;
+}
+.tmTable.getinfo td p{
+/*	font-weight: bold; */
+font-size: 110%;
+}
+.outIp {
+font-size: 32pt;
+line-height: 110%;
+padding:15px 0;
+font-weight: bold;
+color: #0000cc;
+}
+@media screen and (max-width: 500px) {
+.outIp {
+font-size: 26pt;
+}
+}
+@media screen and (max-width: 360px) {
+.outIp {
+font-size: 20pt;
+}
+}
+.shadow {
+display		: inline-block;
+color		: #000080;
+font-size	: 110%;
+/*	text-shadow	: 1px 1px #000;*/
+font-weight	: bold;
+}
+-->
+</style>
+<script type="text/javascript"><!--
+// ===== サーバメンテ支援　履歴共通変数 =====
+// ホスト名等の入力項目名（ID名）
+var keyHostName= '220.151.103.17';
+// ホスト名等の種類 'HOST','DOMAIN','URL','SSL'
+var keyHostKbn = 'HOST';
+// ポート番号の入力項目名（ID名）
+var keyPortName= '';
+//==========================================
+function pageOnload(){
+GetJavaScript();
+}
+var gSt='';
+function GetJavaScript(){
+if((window.screen.width != null)&&(window.screen.height != null)){
+gSt=window.screen.width+' × '+window.screen.height+' ピクセル';
+}
+if(window.screen.availwidth)
+{gSt+=' (タスクバーを除くサイズ '+window.screen.availwidth+' × '+window.screen.availheight+')';
+}
+putSt("iGetScreenSize");
+if(ObjChk(screen.colorDepth)){
+var wC = screen.colorDepth;
+if	(wC==1){gSt='白黒 （1ビット）'}
+else if	(wC==4){gSt='16色 （4ビット）'}
+else if	(wC==8){gSt='256色 （8ビット）'}
+else if	(wC==16){gSt='65,536色 （16ビット）'}
+else if	(wC==24){gSt='1,677万色 （24ビット）'}
+else if	(wC==32){gSt='1,677万色 （32ビット）'}
+else		{gSt=wC+'ビットカラー'}
+}
+putSt("iGetScreenColor");
+var now=new Date();
+gSt=now.toLocaleString();
+putSt("iGetPcTime");
+if(ObjChk(document.referrer.length)){
+if(document.referrer.length != 0){gSt=document.referrer;}
+}
+putSt("iGetReferrer");
+if(ObjChk(navigator.appCodeName)){gSt=navigator.appCodeName;}
+putSt("iGetAppCodeName");
+if(ObjChk(navigator.appMinorVersion)){gSt=navigator.appMinorVersion;}
+putSt("iGetAppMinorVersion");
+if(ObjChk(navigator.appName)){gSt=navigator.appName;}
+putSt("iGetAppName");
+if(ObjChk(navigator.appVersion)){gSt=navigator.appVersion;}
+putSt("iGetAppVersion");
+var wL='';
+var wLN='';
+if(ObjChk(navigator.browserLanguage)){
+wL=navigator.browserLanguage.toLowerCase();
+if(wL.indexOf("ja")!=-1){wLN='「 日本語 」';}
+gSt=navigator.browserLanguage+wLN;
+}
+putSt("iGetBrowserLanguage");
+var wC='';
+if(ObjChk(navigator.cookieEnabled)){
+wC=navigator.cookieEnabled;
+if(wC){gSt+='「 クッキーが利用可能 」';}
+else{gSt+='「 クッキーが利用不可 」';}
+gSt=navigator.cookieEnabled+gSt;
+}
+putSt("iGetCookieEnabled");
+var wC='';
+var wCN='';
+if(ObjChk(navigator.cpuClass)){
+wC=navigator.cpuClass.toLowerCase();
+if(wC.indexOf("x86")!=-1){wCN='「 Intel社CPU または Intel社互換CPU 」';}
+else if(wC.indexOf("68k")!=-1){wCN='「 Motorola社CPU または Motorola社互換CPU 」';}
+else if(wC.indexOf("alpha")!=-1){wCN='「 DEC社CPU または DEC社互換CPU 」';}
+else if(wC.indexOf("ppc")!=-1){wCN='「 IBM社CPU または IBM社互換CPU 」';}
+gSt=navigator.cpuClass+wCN;
+}
+putSt("iGetCpuClass");
+var wL='';
+var wLN='';
+if(ObjChk(navigator.language)){
+wL=navigator.language.toLowerCase();
+if(wL.indexOf("ja")!=-1){wLN='「 日本語 」';}
+gSt=navigator.language+wLN;
+}
+putSt("iGetLanguage");
+var i;
+var j=0;
+var wRc='';
+if(ObjChk(navigator.mimeTypes.length)){
+for (i=0;i<navigator.mimeTypes.length-1; i++) {
+if((navigator.mimeTypes[i].type!='*')&&(navigator.mimeTypes[i].type!='...')){
+j+=1;
+wRc+=j+'. '+navigator.mimeTypes[i].type;
+if(navigator.mimeTypes[i].suffixes!=''){wRc+='　( '+navigator.mimeTypes[i].suffixes+' )';}
+wRc+='<br>';
+}
+}
+gSt=wRc;
+}
+putSt("iGetMimeTypes");
+//プラットフォーム
+var wP='';
+var wPN='';
+if(ObjChk(navigator.platform)){
+wP=navigator.platform.toLowerCase();
+if(wP.indexOf("win")!=-1){wPN='「 Windows系 」';}
+else if(wP.indexOf("mac")!=-1){wPN='「 Macintosh系 」';}
+else if(wP.indexOf("sunos")!=-1){wPN='「 SunOS系 」';}
+else if(wP.indexOf("linux")!=-1){wPN='「 Linux系 」';}
+else if(wP.indexOf("beos")!=-1){wPN='「 BeOS系 」';}
+else if(wP.indexOf("freebsd")!=-1){wPN='「 FreeBSD系 」';}
+else if(wP.indexOf("hp-ux")!=-1){wPN='「 HP-Unix系 」';}
+gSt=navigator.platform+wPN;
+}
+putSt("iGetPlatform");
+var i;
+var wRc='';
+if(ObjChk(navigator.plugins.length)){
+for (i=0;i<navigator.plugins.length-1; i++) {
+wRc+=i+1+'. '+navigator.plugins[i].name+'<BR>';
+wRc+='( '+navigator.plugins[i].description;
+wRc+=' ['+navigator.plugins[i].filename+'] )<BR>';
+}
+gSt=wRc;
+}
+putSt("iGetPlugins");
+var wL='';
+var wLN='';
+if(ObjChk(navigator.systemLanguage)){
+wL=navigator.systemLanguage.toLowerCase();
+if(wL.indexOf("ja")!=-1){wLN='「 日本語 」';}
+gSt=navigator.systemLanguage+wLN;
+}
+putSt("iGetSystemLanguage");
+if(ObjChk(navigator.userAgent)){gSt=navigator.userAgent;}
+putSt("iGetUserAgent");
+var wL='';
+var wLN='';
+if(ObjChk(navigator.userLanguage)){
+wL=navigator.userLanguage.toLowerCase();
+if(wL.indexOf("ja")!=-1){wLN='「 日本語 」';}
+gSt=navigator.userLanguage+wLN;
+}
+putSt("iGetUserLanguage");
+var wL='';
+var wLN='';
+if(ObjChk(navigator.javaEnabled())){
+wL=navigator.javaEnabled();
+if(wL){wLN='「 Javaアプレットが利用可能 」';}
+else if(!wL){wLN='「 Javaアプレットが利用不可 」';}
+gSt=navigator.javaEnabled()+wLN;
+}
+putSt("iGetJavaEnabled");
+}
+function putSt(argID){
+if(gSt==''){gSt='<span style="color:#666666;">（お使いのブラウザから取得できませんでした）</span>';}
+document.getElementById(argID).innerHTML  = gSt;
+gSt='';
+}
+function ObjChk(pObj){
+if(typeof pObj === "undefined"){return false;}
+return true;
+}
+//-->
+</script>
+</head>
+<body>
+<a name="tmPageTop" id="tmPageTop"></a>
+<div id="tmMainFrame" style="width: 900px;">
+<div id="tmHead">
+<a href="https://www.cman.jp/network/"><img src="//sozai.cman.jp/imgSV/pageTopLogo.png" width="900" alt="サーバー監視/ネットワーク監視" style="max-width: 900px;width: 100%;height: auto;"></a>
+</div>
+<div id="tmHeadAd">
+<div style="text-align:center"><div style="display:inline-block">
+<a href="//www.nnetworks.co.jp/" title="サーバー・ネットワーク監視サービス、MSPのスペシャリスト 株式会社エヌネットワークス" target="_blank"><img src="/network/imageAd/nnetworks_20170520.gif" alt="サーバー・ネットワーク監視サービス、MSPのスペシャリスト 株式会社エヌネットワークス" style="max-width: 468px;width: 100%;height: auto;"></a>
+</div>
+<div style="display:inline-block">
+<a href="https://www.gate02.ne.jp/lp/link/cman/index.html" title="10Gbps法人向け回線" target="_blank"><img src="/network/imageAd/cman_uis_20230801.png" alt="10Gbps法人向け回線" style="max-width: 420px;width: 100%;height: auto;"></a>
+</div>
+</div><script>
+var adimage = new Image();
+var addate  = new Date();
+adimage.src = "/network/count/cnt.cgi?ad"+addate.getTime();
+</script>
+
+</div>
+<div id="tmPageLevel">
+<a href="https://www.cman.jp/"><img src="https://www2.cman.jp/imageCom/tmCmanjpIco.gif" width="16" height="16" alt="cman.jp" style="vertical-align: -4px;"> cman.jp</a> &gt; <a href="/network/">サーバ監視TOP</a> &gt; <a href="/network/support/">サーバメンテ支援</a> &gt; IPアドレス確認
+</div>
+<div id="tmSideMain">
+<div id="tmLeftSide">
+<div id="tmMenuListArea">
+<div class="tmMenuList">
+<a class="tmMenuL" href="/network/">トップ</a>
+<hr style="border: dotted 1px #cccccc;margin: 2px 0;pagging:0;">
+<a class="tmMenuL" href="/network/service/">サーバ監視サービス</a>
+<hr style="border: dotted 1px #cccccc;margin: 2px 0;pagging:0;">
+<a class="tmMenuL" href="/network/support/">サーバメンテ支援</a>
+<a class="tmMenuM" href="/network/support/go_access.cgi">IPアドレス確認</a>
+<a class="tmMenuM" href="/network/support/ip.html">ドメイン/IP検索</a>
+<a class="tmMenuM" href="/network/support/port.html">ポートチェック</a>
+<a class="tmMenuM" href="/network/support/ssl.html">SSLチェック</a>
+<a class="tmMenuM" href="/network/support/nslookup.html">DNSチェック</a>
+<a class="tmMenuM" href="/network/support/ping.html">PINGチェック</a>
+<a class="tmMenuM" href="/network/support/http.html">HTTPチェック</a>
+<a class="tmMenuM" href="/network/support/punycode.html">日本語ドメイン変換</a>
+<a class="tmMenuM" href="/network/support/IP_list.html">IPアドレス一覧</a>
+<a class="tmMenuM" href="/network/support/domain_list.html">ドメイン一覧</a>
+<hr style="border: dotted 1px #cccccc;margin: 2px 0;pagging:0;">
+<a class="tmMenuL" href="/network/term/">用語集</a>
+<hr style="border: dotted 1px #cccccc;margin: 2px 0;pagging:0;">
+<a class="tmMenuL" href="/network/manual/">監視操作マニュアル</a>
+<hr style="border: dotted 1px #cccccc;margin: 2px 0;pagging:0;">
+<a class="tmMenuL" href="/network/qa/">よくあるご質問</a>
+<hr style="border: dotted 1px #cccccc;margin: 2px 0;pagging:0;">
+<a class="tmMenuL" href="/network/maintenance/">障害・メンテナンス</a>
+<hr style="border: dotted 1px #cccccc;margin: 2px 0;pagging:0;">
+<div style="background-color: #ddd;padding:3px 0 3px 6px;">当社他サイトUpDate</div>
+<a class="tmMenuL" href="//www.cman.jp/QRcode/" style="background-color: #eee;">QRコード作成</a>
+<a class="tmMenuL" href="//webparts.cman.jp/" style="background-color: #eee;">HPパーツ作成</a>
+</div>
+</div>
+<div id="tmSideAd">
+<div style="text-align: center;">
+<div class="tmAdGaid" style="width:158px">広告</div>
+<div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 160x600, 作成済み 10/06/11 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-5032335798617606"
+     data-ad-slot="6413754613"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+<div style="text-align: center;">
+<div class="tmAdGaid" style="width:158px">広告</div>
+<div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 160x600, 作成済み 10/06/11 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-5032335798617606"
+     data-ad-slot="6413754613"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<div id="tmRightCont" style="float: right;width: 734px;">
+<div id="tmContHeadStr">
+<h1>あなたが現在インターネットに接続しているグローバルIPアドレス確認</h1>
+<div class="tmContNaiyo">
+<div>
+<div></div>
+<div class="inHead" style="margin-top:5px;">あなたの利用しているIPアドレス</div>
+<div class="inArea">
+<div class="outIp">220.151.103.17</div>
+<div style="font-size: 10pt;padding:0 0 10px 0;font-weight: bold;color: #0000cc;">( 220x151x103x17.ap220.ftth.ucom.ne.jp )</div>
+<div style="margin: 5px auto;max-width:650px;">
+<table class="tmTable" style="width:100%;margin: 0;">
+<tbody>
+<tr>
+<th>このIP確認</th>
+<td>
+<div class="ipLink"><a href="javascript:void(0)" onclick="NextPage('ip');return false;">登録情報</a></div>
+<div class="ipLink"><a href="javascript:void(0)" onclick="NextPage('ping');return false;">PING応答</a></div>
+<div class="ipLink"><a href="javascript:void(0)" onclick="NextPage('port');return false;">Port開放</a></div>
+<div class="ipLink"><a href="javascript:void(0)" onclick="NextPage('nslookup');return false;">DNS情報</a></div>
+<div class="ipLink"><a href="javascript:void(0)" onclick="NextPage('http');return false;">HTTP確認</a></div>
+</td>
+</tr>
+<tr>
+<th>PR</th>
+<td>
+<div><span><a href="https://www.gate02.ne.jp/lp/link/cman/index.html" title="10Gbps法人向け回線" target="_blank" class="shadow" style="color:#000080;">当社もサーバ監視で利用する安定した高速回線キャンペーン中!</a><span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="inputarea" style="float: left;width:375px;">
+<table class="tmTable" style="width:100%;margin: 3px 0 0 0;">
+<tbody>
+<tr>
+<th style="white-space: nowrap;">cman.jp 関連ページ</th>
+</tr>
+<tr>
+<td style="padding: 7px 10px;" class="termLink">
+<div class="sansho"><a href="/network/term/ip/">IPアドレス(グローバルIP)とは？</a></div>
+<div class="sansho"><a href="/network/term/ip/p2/">IPアドレスの確認方法は？</a></div>
+<div class="sansho"><a href="/network/term/ip/p3/">固定IPと動的IPの違いは？</a></div>
+<div class="sansho"><a href="/network/term/getinfo/">ホームページにアクセスすると情報が取られる？</a></div>
+<div class="sansho"><a href="/network/support/IP_list.html">IPアドレス一覧</a></div>
+<div class="sansho"><a href="/network/term/subnet/">サブネットマスクとは？</a></div>
+<div class="sansho"><a href="/network/term/whois/">WHOISとは？</a></div>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="margin: 3px 5px;font-size:9pt">長期の機械的な利用は遮断や空ページとすることがあります。</p>
+</div>
+<div id="tmContHeadAd1" style="float: right;width:338px;text-align: right;">
+<div style="text-align: center;">
+<div class="tmAdGaid" style="width:336px">広告</div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336 x 280 サーバ監視 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-5032335798617606"
+     data-ad-slot="4536496116"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+</div>
+</div>
+<div id="tmContMain">
+<h2>あなたの通信情報／HTTPリクエスト(ENV)より情報を取得（抜粋）</h2>
+<div class="tmContNaiyo">
+<p style="margin: 5px 0 0 5px;">以下であなたの発信している情報を調べることができます。<br>HTTPリクエスト(ENV:環境変数)より情報を取得し表示しています（代表的な抜粋）<br>HTTPリクエスト(ENV:環境変数)は、インターネットでホームページを見るときに通信やページ表示制御に利用するため自動で送信されている情報で、不正に取得した情報ではありません。インターネットの仕組みで送受信される項目となります。<br>詳細は「<span class="sansho"><a href="/network/term/getinfo/">ホームページにアクセスすると情報が取られる(何が分かる)？</a></span>」を参照</p>
+<div style="text-align: right;"><a href="../term/getinfo/p2/">各項目に意味はこちら</a></div>
+<h3>あなたの通信に必要な情報</h3>
+<div class="tmMargL15px">
+<table class="tmTable getinfo" style="width: 100%;margin-bottom:20px;">
+<colgroup>
+<col span="1" style="width:20%">
+<col span="1" style="width:80%">
+</colgroup>
+<tbody>
+<tr><th>あなたのIPアドレス<br>(グローバルIP)</th><td><p>220.151.103.17</p><span class="sansho"><a href="/network/term/ip/">IPアドレス(グローバルIPアドレス)とは？</a></span></td></tr>
+<tr><th>ホスト名(FQDN)<br>(REMOTE_HOST)</th><td><p>220x151x103x17.ap220.ftth.ucom.ne.jp</p><span class="sansho"><a href="/network/term/domain/">ドメイン・ホスト名とは？</a></span></td></tr>
+<tr><th>通信ポート<br>(REMOTE_PORT)</th><td><p>56943</p><span class="sansho"><a href="/network/term/port/">ポートとは？</a></span></td></tr>
+</tbody>
+</table>
+</div>
+<div style="text-align: right;"><a href="../term/getinfo/p2/">各項目に意味はこちら</a></div>
+<h3>あなたの通信内に含まれるブラウザ等情報</h3>
+<div class="tmMargL15px">
+<table class="tmTable getinfo" style="width: 100%;margin-bottom:20px;">
+<colgroup>
+<col span="1" style="width:20%">
+<col span="1" style="width:80%">
+</colgroup>
+<tbody>
+<tr><th>OS/ブラウザ等情報<br>(HTTP_USER_AGENT)</th><td><p>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36</p><span class="sansho"><a href="http://htaccess.cman.jp/useragent/">ユーザエージェントとは？</a></span></td></tr>
+<tr><th>ブラウザの言語<br><span style="letter-spacing: 0">(HTTP_ACCEPT_LANGUAGE)</span></th><td><p>ja,en-US;q=0.9,en;q=0.8</p></td></tr>
+<tr><th>ブラウザの文字コード<br><span style="letter-spacing: 0">(HTTP_ACCEPT_CHARSET)</span></th><td><p><span style="color:#666666;">（取得できませんでした）</span></p></td></tr>
+<tr><th>サポートMINEタイプ<br>(HTTP_ACCEPT)</th><td><p>text/html, application/xhtml+xml, application/xml;q=0.9, image/avif, image/webp, image/apng, */*;q=0.8, application/signed-exchange;v=b3;q=0.7</p></td></tr>
+<tr><th>エンコード方式<br><span style="letter-spacing: 0">(HTTP_ACCEPT_ENCODING)</span></th><td><p>gzip, deflate, br</p></td></tr>
+<tr><th>接続の状態<br>(HTTP_CONNECTION)</th><td><p>keep-alive</p></td></tr>
+<tr><th>接続維持の最長時間<br>(HTTP_KEEP_ALIVE)</th><td><p><span style="color:#666666;">（取得できませんでした）</span></p></td></tr>
+<tr><th>どこから来たか<br>(HTTP_REFERER)</th><td><p>https://www.google.com/</p></td></tr>
+<tr><th>パソコンのCPU情報<br>(HTTP_UA_CPU)</th><td><p><span style="color:#666666;">（取得できませんでした）</span></p></td></tr>
+<tr><th>ユーザ追跡拒否機能<br>(HTTP_DNT)</th><td><p><span style="color:#666666;">（取得できませんでした）</span></p></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="text-align: right;"><a href="../term/getinfo/p2/">各項目に意味はこちら</a></div>
+<h2>あなたのパソコン（ブラウザ）などの情報をJavaScriptで取得（抜粋）</h2>
+<div class="tmContNaiyo">
+<p style="margin: 5px 0 10px 5px;">JavaScriptで情報を取得し表示しています（代表的な抜粋）<br>詳細は「<span class="sansho"><a href="/network/term/getinfo/">ホームページにアクセスすると情報が取られる(何が分かる)？</a></span>」を参照</p>
+<div class="tmMargL15px">
+<table class="tmTable getinfo" style="width: 100%">
+<colgroup>
+<col span="1" style="width:20%">
+<col span="1" style="width:80%">
+</colgroup>
+<tbody>
+<tr><th>モニタサイズ<br><span style="letter-spacing: 0">(screen.width,height)</span></th><td id="iGetScreenSize"></td></tr>
+<tr><th>モニタ表示色<br><span style="letter-spacing: 0">(screen.colorDepth)</span></th><td id="iGetScreenColor"></td></tr>
+<tr><th>どこから来たか<br><span style="letter-spacing: 0">(document.referrer)</span></th><td id="iGetReferrer"></td></tr>
+<tr><th>ブラウザ開発コード<br>(appCodeName)</th><td id="iGetAppCodeName"></td></tr>
+<tr><th>ブラウザ種類<br>(appName)</th><td id="iGetAppName"></td></tr>
+<tr><th>ブラウザを表す文字<br>(userAgent)</th><td id="iGetUserAgent"></td></tr>
+<tr><th>ブラウザバージョン<br>(appVersion)</th><td id="iGetAppVersion"></td></tr>
+<tr><th>マイナーバージョン<br>(appMinorVersion)</th><td id="iGetAppMinorVersion"></td></tr>
+<tr><th>ブラウザの言語環境<br>(browserLanguage)</th><td id="iGetBrowserLanguage"></td></tr>
+<tr><th>ブラウザの言語環境<br>(language)</th><td id="iGetLanguage"></td></tr>
+<tr><th>パソコンの言語環境<br>(systemLanguage)</th><td id="iGetSystemLanguage"></td></tr>
+<tr><th>ユーザーの言語環境<br>(userLanguage)</th><td id="iGetUserLanguage"></td></tr>
+<tr><th>プラットフォーム<br>(platform)</th><td id="iGetPlatform"></td></tr>
+<tr><th>パソコンのCPU情報<br>(cpuClass)</th><td id="iGetCpuClass"></td></tr>
+<tr><th>クッキーの利用可否<br>(cookieEnabled)</th><td id="iGetCookieEnabled"></td></tr>
+<tr><th>Javaの利用可否<br>(javaEnabled)</th><td id="iGetJavaEnabled"></td></tr>
+<tr><th>パソコンの日時<br><span style="letter-spacing: 0">(now.toLocaleString)</span></th><td id="iGetPcTime"></td></tr>
+<tr><th>サポートMIMEタイプ<br>(mimeTypes)</th><td id="iGetMimeTypes"></td></tr>
+<tr><th>プラグイン<br>(plugins)</th><td id="iGetPlugins"></td></tr>
+<tr><th>あなたの位置取得<br><span style="letter-spacing: 0">(getCurrentPosition)</span></th><td>以下ページ（当社サイト）で、JavaScriptで取得できる位置情報を確認できます<br><span class="sansho"><a href="https://web-designer.cman.jp/javascript_ref/others/gps/">JavaScriptで位置情報(GPS)取得</a></span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<a href="#tmPageTop" class="tmPageTop">ページTOP</a>
+</div>
+<div id="tmPageCtrl">
+</div>
+</div>
+</div>
+
+<div id="tmBottomAd">
+<div class="tmAdGaid">広告</div>
+<div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- autoサーバ監視 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5032335798617606"
+     data-ad-slot="7391332119"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<div id="tmFooter">
+<table>
+<tr>
+<td  style="width:140px;text-align: center;vertical-align: top;line-height:1em;"><img src="//image-convert.cman.jp/qrOut/qrImgPut.cgi?u=https%3A%2F%2Fwww%2Ecman%2Ejp%2Fnetwork%2Fsupport%2Fgo%5Faccess%2Ecgi" alt="QrCode"><div style="margin-top:3px;font-size:90%">このページのURL</div></td>
+<td id="tmFooterLink">
+<a class="tmMenuM" href="/network/qa/">よくあるご質問</a>
+<a class="tmMenuM" href="/network/release/">お知らせ</a>
+<a class="tmMenuM" href="/network/info/">当サイトについて</a>
+<a class="tmMenuM" href="/network/info/contact/">お問い合わせ</a>
+<hr style="border: dotted 1px #cccccc;margin: 2px 0;pagging:0;">
+<div id="cmanLinkGaid" style="display:none;border-style: outset;margin-bottom:10px;"><a href="javascript:void(0)" onclick="cmanLinkGaidClick()" style="padding: 1px 5px 2px 18px;">cman.jp無料サービス一覧</a></div>
+<div id="cmanLinkMeisai" style="">
+<a href="https://www.cman.jp/">cman.jp</a>
+<a href="https://www.cman.jp/QRcode/">QRコード作成【無料】</a>
+<a href="https://image-convert.cman.jp/">画像加工【無料】</a>
+<a href="https://htaccess.cman.jp/">htaccess作成【無料】</a>
+<a href="https://note.cman.jp/">WEB便利ノート【無料】</a>
+<a href="https://hikaku.cman.jp/">IT比較実験【無料】</a>
+<a href="https://text-img.cman.jp/">文字/ボタンのイメージ画像作成【無料】</a>
+<a href="https://sozai.cman.jp/">アイコン素材【無料】</a>
+<a href="https://web-designer.cman.jp/">WEBページ作成リファレンス【無料】</a>
+<a href="https://webparts.cman.jp/">ホームページのパーツ作成【無料】</a>
+</div>
+</td>
+</tr>
+</table>
+
+</div>
+<div id="tmDevice">
+<table style="width:100%"><tr><td><a href="javascript:void(0)" onclick="tmChangeView('smart')" id="tmViewSmart">スマートフォン・タブレット</a></td><td style="text-align: right;"><a href="https://www.cman.co.jp" style="color: #666;font-size:95%">運営 : CMAN 株式会社シーマン</a></td></tr></table>
+</div>
+</div>
+<input type="hidden" value="220.151.103.17" id="sysNowIp">
+<input type="hidden" value="220.151.103.17" id="220.151.103.17">
+
+<input type="hidden" value="0" id="tmCgiSideOff">
+</body>
+</html>
